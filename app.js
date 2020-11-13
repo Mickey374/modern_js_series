@@ -21,6 +21,13 @@ const game = ()=>{
         const options = document.querySelectorAll(".options button");
         const playerHand = document.querySelector('.player-hand');
         const computerHand = document.querySelector(".computer-hand");
+        const hands = document.querySelectorAll(".hands img");
+
+        hands.forEach((hand)=>{
+            hand.addEventListener("animationend", function(){
+                this.style.animation = "";
+            });
+        });
 
         //Get computer options randomly
         const computerOptions = ['rock', 'paper', 'scissors'];
@@ -36,13 +43,17 @@ const game = ()=>{
                 const computerChoice = computerOptions[computerNumber];
                 //console.log(computerChoice);
 
-                //Call Compare Hands Function
-                compareHands(this.textContent, computerChoice);
+                //Create a Set Timeout Function for Game Control
+                setTimeout(()=>{//Call Compare Hands Function
+                    compareHands(this.textContent, computerChoice);
+    
+                    //Update the Images
+                    playerHand.src = `/assets/${this.textContent}.png`;
+                    computerHand.src = `/assets/${computerChoice}.png`;}, 2000)
 
-                //Update the Images
-                playerHand.src = `/assets/${this.textContent}.png`;
-
-                computerHand.src = `/assets/${computerChoice}.png`;
+                //Shake Player hands with Rock image before choosing random image
+                playerHand.style.animation = "shakePlayer 2s ease";
+                computerHand.style.animation = "shakeComputer 2s ease";
             })
         });
     };
