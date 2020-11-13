@@ -37,7 +37,7 @@ const game = ()=>{
                 //console.log(computerChoice);
 
                 //Call Compare Hands Function
-                //compareHands();
+                compareHands(this.textContent, computerChoice);
 
                 //Update the Images
                 playerHand.src = `/assets/${this.textContent}.png`;
